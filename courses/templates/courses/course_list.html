@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'course/course_list.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+
+
+</head>
+
+<body>
+    <!-- Display any messages to the user, if any -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h1>Welcome to Course Registration system</h1>
+    <div class="course-section">
+        <h2>Available Courses</h2>
+
+        <!-- Display the courses one by one to the user as an ordered list-->
+        <ol>
+            {% for course in courses %}
+            <li class="course">
+                {{ course.title }} - <p>{{ course.current_enrolled }}/{{ course.maximum_capacity }}</p>
+                <a href="{% url 'register_course' course.id %}">Register</a>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+
+
+
+</body>
+
+</html>
